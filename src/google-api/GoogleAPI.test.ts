@@ -48,7 +48,7 @@ describe('GoogleAPI', () => {
     });
     test('throws an exception if an expected error occurs', async () => {
       const httpClientMock = {
-        getJSON: jest.fn().mockRejectedValue({ message: 'error message' }),
+        getJSON: jest.fn().mockRejectedValue(new Error('error message')),
       } as IHTTPClient;
 
       const service = new GoogleAPI(httpClientMock);
@@ -151,7 +151,7 @@ describe('GoogleAPI', () => {
     });
     test('throws an exception if an unexpected error occurs', async () => {
       const httpClientMock = {
-        getJSON: jest.fn().mockRejectedValue({ message: 'error message' }),
+        getJSON: jest.fn().mockRejectedValue(new Error('error message')),
       } as IHTTPClient;
 
       const service = new GoogleAPI(httpClientMock);

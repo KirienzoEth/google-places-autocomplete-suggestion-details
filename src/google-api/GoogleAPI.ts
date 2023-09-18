@@ -38,10 +38,11 @@ export default class GoogleAPI implements IGoogleAPI {
       response = (await this.httpClient.getJSON(
         url.toString(),
       )) as IPlaceDetailsReponse;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } catch (error: unknown) {
       throw new UnexpectedAPIError(
-        `An unexpected error occured: ${error.message}`,
+        `An unexpected error occured${
+          error instanceof Error ? `: ${error.message}` : ''
+        }`,
       );
     }
 
@@ -63,10 +64,11 @@ export default class GoogleAPI implements IGoogleAPI {
       response = (await this.httpClient.getJSON(
         url.toString(),
       )) as IPlaceAutocompleteReponse;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } catch (error: unknown) {
       throw new UnexpectedAPIError(
-        `An unexpected error occured: ${error.message}`,
+        `An unexpected error occured${
+          error instanceof Error ? `: ${error.message}` : ''
+        }`,
       );
     }
 
