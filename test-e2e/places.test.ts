@@ -16,6 +16,10 @@ describe('Google Places E2E Tests', () => {
       expect(firstSuggestion.components).toHaveProperty('region');
       expect(firstSuggestion.components).toHaveProperty('country');
     });
+    test('return an empty array if query outside of the Bahamas', async () => {
+      const suggestions = await getAutocompleteDetails('Paris, France');
+      expect(suggestions).toStrictEqual([]);
+    });
     test('throws an error if the input is empty', async () => {
       const promise = getAutocompleteDetails('');
       expect(promise).rejects.toThrow(InvalidRequestError);
