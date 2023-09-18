@@ -63,36 +63,42 @@ describe('GoogleAPI', () => {
         getJSON: jest.fn().mockResolvedValue({
           predictions: [],
           status: GoogleAPIStatus.REQUEST_DENIED,
+          error_message: 'You must use an API key',
         } as IPlaceAutocompleteReponse),
       } as IHTTPClient;
 
       const service = new GoogleAPI(httpClientMock);
       const promise = service.getAutocompleteSuggestionPlaceIDs('Test');
       expect(promise).rejects.toThrow(RequestDeniedError);
+      expect(promise).rejects.toThrowError('You must use an API key');
     });
     test('throws an exception if the input is not valid', async () => {
       const httpClientMock = {
         getJSON: jest.fn().mockResolvedValue({
           predictions: [],
           status: GoogleAPIStatus.INVALID_REQUEST,
+          error_message: 'Invalid input',
         } as IPlaceAutocompleteReponse),
       } as IHTTPClient;
 
       const service = new GoogleAPI(httpClientMock);
       const promise = service.getAutocompleteSuggestionPlaceIDs('');
       expect(promise).rejects.toThrow(InvalidRequestError);
+      expect(promise).rejects.toThrowError('Invalid input');
     });
     test('throws an exception if the user has issues with his Google Cloud account', async () => {
       const httpClientMock = {
         getJSON: jest.fn().mockResolvedValue({
           predictions: [],
           status: GoogleAPIStatus.OVER_QUERY_LIMIT,
+          error_message: 'google account issue',
         } as IPlaceAutocompleteReponse),
       } as IHTTPClient;
 
       const service = new GoogleAPI(httpClientMock);
       const promise = service.getAutocompleteSuggestionPlaceIDs('Test');
       expect(promise).rejects.toThrow(OverQueryLimitError);
+      expect(promise).rejects.toThrowError('google account issue');
     });
   });
 
