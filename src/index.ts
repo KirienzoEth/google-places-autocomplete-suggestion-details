@@ -1,5 +1,3 @@
-import { config } from 'dotenv';
-config();
 import googleAPIClient from './google-api';
 import { IPlaceDetails, PlaceType } from './google-api/GoogleAPITypes';
 import IAddressDetails from './types/IAddressDetails';
