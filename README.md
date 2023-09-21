@@ -47,7 +47,7 @@ API Key: Go to https://console.cloud.google.com and get one
    2. I did take some type and enums from the library to save some time.
 3. The formatted address returned by the Places Details API endpoint is a valid address so I used it as the full address that we will return to users, but:
    1. The address components are not all used to create the full formatted address, this might cause some confusion
-   2. If the consistency between the address components and the formatted address is undesirable, we will need to do the concatenation ourselves or filter out the components that are not in the returned formatted address (we can do it directly in `src/index.ts -> formatPlaceDetails`)
+   2. If the consistency between the address components and the formatted address is required, we will need to do the concatenation ourselves or filter out the components that are not in the returned formatted address (we can do it directly in `src/index.ts -> formatPlaceDetails`)
 4. After some research (e.g: https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/bhsEn.pdf), I found that the Bahamas do not use the following address components:
    1. unit (This might be an API limitation, I didn't see any place type that would match this property)
    2. suburb
