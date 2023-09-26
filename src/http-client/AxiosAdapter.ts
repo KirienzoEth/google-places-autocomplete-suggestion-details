@@ -2,10 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import IHTTPClient from './IHTTPClient';
 
 export default class AxiosAdapter implements IHTTPClient {
-  async getJSON(
-    url: string,
-    options: AxiosRequestConfig = {},
-  ): Promise<object> {
+  async getJSON<T>(url: string, options: AxiosRequestConfig = {}): Promise<T> {
     const response = await axios.get(url, {
       ...options,
     });

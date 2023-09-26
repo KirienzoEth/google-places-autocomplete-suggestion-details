@@ -1,3 +1,3 @@
 export default interface IHTTPClient {
-  getJSON(url: string, options?: object): Promise<object>;
+  getJSON<T>(url: string, options?: object): Promise<T>;
 }
