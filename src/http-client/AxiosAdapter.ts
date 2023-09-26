@@ -7,9 +7,7 @@ export default class AxiosAdapter implements IHTTPClient {
     options: AxiosRequestConfig = {},
   ): Promise<T> {
     const input = url instanceof URL ? url.toString() : url;
-    const response = await axios.get(input, {
-      ...options,
-    });
+    const response = await axios.get(input, options);
 
     return response.data;
   }
