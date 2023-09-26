@@ -35,9 +35,7 @@ export default class GoogleAPI implements IGoogleAPI {
 
     let response;
     try {
-      response = await this.httpClient.getJSON<IPlaceDetailsReponse>(
-        url.toString(),
-      );
+      response = await this.httpClient.getJSON<IPlaceDetailsReponse>(url);
     } catch (error: unknown) {
       throw new UnexpectedAPIError(
         `An unexpected error occured${
@@ -61,9 +59,7 @@ export default class GoogleAPI implements IGoogleAPI {
 
     let response;
     try {
-      response = await this.httpClient.getJSON<IPlaceAutocompleteReponse>(
-        url.toString(),
-      );
+      response = await this.httpClient.getJSON<IPlaceAutocompleteReponse>(url);
     } catch (error: unknown) {
       throw new UnexpectedAPIError(
         `An unexpected error occured${
