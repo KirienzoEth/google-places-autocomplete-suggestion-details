@@ -2,6 +2,7 @@ import IHTTPClient from '../http-client/IHTTPClient';
 import GoogleAPI from './GoogleAPI';
 import {
   InvalidRequestError,
+  MissingAPIKeyError,
   OverQueryLimitError,
   PlaceNotFoundError,
   RequestDeniedError,
@@ -14,7 +15,21 @@ import {
   PlaceType,
 } from './GoogleAPITypes';
 
+const apiKey = process.env.GOOGLE_PLACE_API_KEY;
+
 describe('GoogleAPI', () => {
+  describe('constructor', () => {
+    afterEach(() => {
+      process.env.GOOGLE_PLACE_API_KEY = apiKey;
+    });
+    test('should throw an error if the API key env variable is not set', () => {
+      const httpClientMock = {} as IHTTPClient;
+
+      process.env.GOOGLE_PLACE_API_KEY = '';
+      expect(() => new GoogleAPI(httpClientMock)).toThrow(MissingAPIKeyError);
+    });
+  });
+
   describe('getAutocompleteSuggestionPlaceIDs', () => {
     test('returns place IDs of suggestions', async () => {
       const httpClientMock = {

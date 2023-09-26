@@ -26,7 +26,10 @@ API Key: Go to https://console.cloud.google.com and get one
 # Test:
 
 1. yarn install
-2. yarn test
+2. copy/paste `.env.example` into a `.env` file
+   1. For unit tests, any value is fine for the `GOOGLE_PLACE_API_KEY` variable as long as it's not undefined or an empty string
+   2. For end-to-end tests, it needs to be a valid API key
+3. yarn test
 
 # Requirements:
 

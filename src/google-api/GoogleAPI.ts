@@ -1,6 +1,7 @@
 import IHTTPClient from '../http-client/IHTTPClient';
 import {
   InvalidRequestError,
+  MissingAPIKeyError,
   OverQueryLimitError,
   PlaceNotFoundError,
   RequestDeniedError,
@@ -22,7 +23,14 @@ export default class GoogleAPI implements IGoogleAPI {
     'https://maps.googleapis.com/maps/api/place/details/json';
 
   constructor(httpClient: IHTTPClient) {
-    this.apiKey = process.env.GOOGLE_PLACE_API_KEY ?? '';
+    const apiKey = process.env.GOOGLE_PLACE_API_KEY;
+    if (!apiKey) {
+      throw new MissingAPIKeyError(
+        'Environment variable GOOGLE_PLACE_API_KEY is missing',
+      );
+    }
+
+    this.apiKey = apiKey;
     this.httpClient = httpClient;
   }
 

@@ -1,3 +1,6 @@
+/** Indicates that the environment variable used to get the key has not been found. */
+export class MissingAPIKeyError extends Error {}
+
 /** Indicates that the request is missing an API key or the key is invalid. */
 export class RequestDeniedError extends Error {}
 
