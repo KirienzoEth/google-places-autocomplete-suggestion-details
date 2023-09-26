@@ -47,10 +47,5 @@ export async function getAutocompleteDetails(
     suggestions.map((placeID) => googleAPIClient.getPlaceDetails(placeID)),
   );
 
-  const addresses: IAddressDetails[] = [];
-  suggestionDetails.forEach((suggestion) => {
-    addresses.push(formatPlaceDetails(suggestion));
-  });
-
-  return addresses;
+  return suggestionDetails.map(formatPlaceDetails);
 }
